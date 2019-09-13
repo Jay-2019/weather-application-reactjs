@@ -10,7 +10,7 @@ class App extends React.Component {
 
         return (
             <Container fluid="true" className={style.containerStyle}>
-                {/* this is Header on Application which include a NavBar */}
+                {/* this is Header on Application which Contain a NavBar */}
                 <Row className={style.nabbarStyle}>
                     <Col md={12}>
                         <Navbar expand="lg" bg="dark" variant="dark">
@@ -27,7 +27,7 @@ class App extends React.Component {
                         </Navbar>
                     </Col>
                 </Row>
-                {/* this is Body of Application Which include A SearchBar */}
+                {/* this is Body of Application Which Contain A SearchBar */}
                 <Row>
                     <Col>
                         <Searchbar />
