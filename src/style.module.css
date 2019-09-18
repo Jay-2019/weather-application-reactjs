@@ -11,8 +11,12 @@
   /* padding-left: 1px; */
 }
 
-.nabbarStyle {
+.navbarStyle {
   padding-top: 5px;
   /* padding-right: 1px; */
   padding-bottom: 5px;
+}
+
+.buttonstyle {
+  width: -webkit-fill-available !important;
 }
