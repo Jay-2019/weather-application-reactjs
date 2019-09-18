@@ -13,7 +13,7 @@ class Apicall extends React.Component {
         const cityName = this.state.getCityName;
         console.log(cityName);
         const getReasponse = await fetch(`api.openweathermap.org/data/2.5/weather?q=${cityName}appid=a0dee3ad64641dc88ea823ed96aaec61`);
-        const getWeather = getReasponse.json();
+        const getWeather = await getReasponse.json();
         console.log(getWeather);
         // send  getWather to app.js using a call back method
         // getWeather is available as a props for display weather in the Displayweather.js component
