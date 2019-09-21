@@ -2,7 +2,7 @@ import React from 'react';
 import style from "../style.module.css";
 import { Container, Row, Navbar, Col } from 'react-bootstrap';
 import logo from "./logo192.png";
-import apiCall from "./Apicall";
+import Apicall from "./Apicall";
 import Searchbar from './Searchbar';
 
 class App extends React.Component {
@@ -20,11 +20,11 @@ class App extends React.Component {
     getDataFromSearchbar = (getData) => {
         this.setState({ getCityName: getData, isLoading: true });
         console.log(getData);
-        apiCall.fetchWeatherDetails(getData, this.setWeatherDetails);
+        Apicall.fetchWeatherDetails(getData, this.setWeatherDetails);
     }
 
     setWeatherDetails = (data = {}) => {
-        const { main = {}} = data;
+        const { main = {} } = data;
         const { humidity, temp, pressure } = main;
         this.setState({
             isLoading: false,
@@ -36,13 +36,30 @@ class App extends React.Component {
 
     renderWeatherDetails = () => {
         const { isLoading } = this.state;
+        console.log(isLoading);
         if (isLoading) {
-            return <h4>API Calling...</h4>;
+            return <>API Calling...</>;
         }
-        const { humidity='', temp='', pressure=''} = this.state;
+
+        const { humidity = '', temp = '', pressure = '' } = this.state;
+        // OR
+        // const { humidity, temp, pressure } = this.state;
+
+
+
+        // this block of code for (skill) professionals
         if (!(humidity || temp || pressure)) {
+
             return null;
         }
+        // OR
+        // this is for beginners..
+        // if ((humidity === '' || temp === '' || pressure === '' )) {
+
+        //         return null;
+        //     }
+
+
         return (
             <>
                 <div>{`Humidity: ${humidity}`}</div>
@@ -89,7 +106,7 @@ class App extends React.Component {
                     </Col>
                 </Row>
 
-                {this.renderWeatherDetails()}
+
 
                 {/* this is a body of application  */}
                 <Row>
@@ -97,6 +114,9 @@ class App extends React.Component {
                         <h2>
                             {this.state.getCityName} India
 
+                        </h2>
+                        <h2>
+                            {this.renderWeatherDetails()}
                         </h2>
                     </Col>
                 </Row>
