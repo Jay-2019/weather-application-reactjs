@@ -17,6 +17,16 @@
   padding-bottom: 5px;
 }
 
-.buttonstyle {
+/* .buttonstyle {
   width: -webkit-fill-available !important;
+} */
+
+.searchBar {
+  width: 800px !important;
 }
+.searchButton {
+  width: 300px !important;
+}
+/* .dropdownButton {
+  width: 180px !important;
+} */

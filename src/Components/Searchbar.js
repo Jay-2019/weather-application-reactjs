@@ -1,12 +1,26 @@
-import React from "react";
-// import style from "../style.module.css";
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import React, { Component } from 'react'
+import { Form, FormControl, Button, Dropdown } from 'react-bootstrap';
+import style from "../style.module.css";
 
-
-class Searchbar extends React.Component {
+export default class SearchBar extends Component {
 
     state = {
         cityName: '',
+        countryName: 'India',
+    }
+
+    // Handle Change Method
+    handleChange = (event) => {
+        const { value } = event.target;
+        this.setState({ cityName: value.toUpperCase() });
+        console.log(event.target.value);
+    }
+
+    // Handle Select
+    handleSelect = (key, event) => {
+        console.log(key);
+        this.setState({ countryName: key });
+
     }
 
     //  Handler Submit Method
@@ -17,52 +31,55 @@ class Searchbar extends React.Component {
         } else if (document.getElementById('cityName').value.match("^[a-zA-Z ]*$") === null) {
             alert("city name contain only Alphabets ");
         } else {
-            this.props.sendDataFromSearchbar(this.state.cityName);
-            this.setState({ type: '' });
+            //send data from searchbar to App.js
+            this.props.sendDataFromSearchbar(this.state.cityName, this.state.countryName);
+
+            this.setState({
+                cityName: '',
+                countryName: 'India'
+            });
             return;
         }
-
-
     }
-
-    // Handle Change Method
-    handleChange = (event) => {
-        this.setState({ cityName: event.target.value });
-        console.log(event.target.value);
-    }
-
 
     render() {
-
         return (
-            <React.Fragment>
+            <div>
+                <br />
+                <Form inline onSubmit={this.handleSubmit}>
+                    <FormControl
+                        id="cityName"
+                        type="text"
+                        size=""
+                        placeholder="Enter Your City Name..."
+                        className={style.searchBar}
+                        onChange={this.handleChange}
+                    />
+                    &nbsp;  &nbsp;
+                    {/* className={style.dropdownButton} */}
+                    <Dropdown onSelect={this.handleSelect}>
+                        <Dropdown.Toggle variant="info" id="dropdown-basic">
+                            {this.state.countryName}
+                        </Dropdown.Toggle>
 
-                <form onSubmit={this.handleSubmit}>
-                    <Row>
-                        <Col md={10}>
-                            <Form.Group >
-                                <Form.Control
-                                    id="cityName"
-                                    size="lg"
-                                    type="text"
-                                    placeholder="Enter Your City Name..."
-                                    onChange={this.handleChange}
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col md={1}>
-                            <Button
-                                variant="info"
-                                type="submit"
-                                size="lg"
-                            >
-                                Search...
-                            </Button>
-                        </Col>
-                    </Row>
-                </form>
-            </React.Fragment>
+                        <Dropdown.Menu  >
+                            <Dropdown.Item eventKey="India">India</Dropdown.Item>
+                            <Dropdown.Item eventKey="Australia">Australia</Dropdown.Item>
+                            <Dropdown.Item eventKey="Canada" >Canada</Dropdown.Item>
+                            <Dropdown.Item eventKey="London" >London</Dropdown.Item>
+                            <Dropdown.Item eventKey="America">America</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    &nbsp;  &nbsp;
+                    <Button
+                        variant="outline-info"
+                        type="submit"
+                        className={style.searchButton}
+                    >
+                        Search...
+                     </Button>
+                </Form>
+            </div>
         )
     }
 }
-export default Searchbar;
